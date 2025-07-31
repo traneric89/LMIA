@@ -94,47 +94,52 @@ const LocalExcelReader = () => {
       </div>
 
       {/* Table */}
-      <table className="w-full text-sm text-left text-gray-700 dark:text-gray-300 border-collapse">
-        <thead>
-          <tr className="bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 uppercase tracking-wider">
-            {filteredData[0] &&
-              Object.keys(filteredData[0]).map((key, i) => (
-                <th
-                  key={i}
-                  className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-medium"
-                >
-                  {key}
-                </th>
-              ))}
-          </tr>
-        </thead>
-        <tbody>
-          {currentRows.map((row, rowIndex) => (
-            <tr
-              key={rowIndex}
-              className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
-            >
-              {Object.values(row).map((val, i) => (
-                <td key={i} className="px-4 py-4 text-sm align-top break-words">
-                  {val}
-                </td>
-              ))}
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-700 dark:text-gray-300 border-collapse min-w-max">
+          <thead>
+            <tr className="bg-gray-100 dark:bg-gray-800 text-xs text-gray-600 dark:text-gray-300 uppercase tracking-wider">
+              {filteredData[0] &&
+                Object.keys(filteredData[0]).map((key, i) => (
+                  <th
+                    key={i}
+                    className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-medium whitespace-nowrap"
+                  >
+                    {key}
+                  </th>
+                ))}
             </tr>
-          ))}
-          {currentRows.length === 0 && (
-            <tr>
-              <td
-                colSpan={
-                  filteredData[0] ? Object.keys(filteredData[0]).length : 1
-                }
-                className="px-4 py-6 text-center text-gray-500 dark:text-gray-400"
+          </thead>
+          <tbody>
+            {currentRows.map((row, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
               >
-                No results found.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+                {Object.values(row).map((val, i) => (
+                  <td
+                    key={i}
+                    className="px-4 py-4 text-sm align-top break-words whitespace-nowrap"
+                  >
+                    {val}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            {currentRows.length === 0 && (
+              <tr>
+                <td
+                  colSpan={
+                    filteredData[0] ? Object.keys(filteredData[0]).length : 1
+                  }
+                  className="px-4 py-6 text-center text-gray-500 dark:text-gray-400"
+                >
+                  No results found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {/* Pagination */}
       <div className="flex justify-between mt-6">
